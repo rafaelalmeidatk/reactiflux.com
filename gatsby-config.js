@@ -23,6 +23,13 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
+        name: 'blog',
+        path: `${__dirname}/src/blog/`,
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
         name: 'transcripts',
         path: `${__dirname}/src/transcripts/`,
       },
@@ -59,8 +66,8 @@ module.exports = {
         backgroud_color: '#ffffff',
         theme_color: '#dc1d64',
         display: 'standalone',
-        icon: 'src/assets/reactiflux.png'
-      }
-    }
+        icon: 'src/assets/reactiflux.png',
+      },
+    },
   ],
 };

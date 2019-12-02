@@ -27,6 +27,7 @@ export function Menu() {
           <Link to="/schedule/">Q&A Schedule</Link>
           <Link to="/transcripts/">Transcripts</Link>
           <Link to="/jobs/">Jobs</Link>
+          <Link to="/blog/">Blog</Link>
           <Link to="/learning/">Learning</Link>
         </MobileNavIfMobile>
       </Wrapper>

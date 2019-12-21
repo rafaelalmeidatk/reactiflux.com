@@ -11,19 +11,20 @@ const fields = [
   },
 ];
 
-const onSubmit = (fieldState) =>
-  fetch('/', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      'form-name': 'contact',
-      ...Object.fromEntries(fieldState),
-    }),
-  });
-
 const Index = () => {
+  const formRef = React.useRef();
+  const onSubmit = React.useCallback(() => {
+    const body = new FormData(formRef.current);
+    body.set('form-name', 'contact');
+    return fetch('/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body,
+    });
+  }, []);
+
   return (
     <Layout
       title="Contact Us"
@@ -56,7 +57,12 @@ const Index = () => {
           of your message.
         </p>
         <hr />
-        <Form fields={fields} name="contact" onSubmit={onSubmit} />
+        <Form
+          ref={formRef}
+          fields={fields}
+          name="contact"
+          onSubmit={onSubmit}
+        />
       </div>
     </Layout>
   );

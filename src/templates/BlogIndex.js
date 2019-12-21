@@ -34,7 +34,7 @@ export default function BlogIndex(props) {
 export const pageQuery = graphql`
   query($skip: Int!, $limit: Int!) {
     allFile(
-      filter: { sourceInstanceName: { eq: "blog" } }
+      filter: { sourceInstanceName: { eq: "blog" }, extension: { in: ["md"] } }
       sort: { order: DESC, fields: [childMarkdownRemark___frontmatter___date] }
       limit: $limit
       skip: $skip

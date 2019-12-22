@@ -2,6 +2,12 @@ import React from 'react';
 
 import { Layout, Link, Form } from '@components';
 
+const encode = (data) => {
+  return Object.keys(data)
+    .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+    .join('&');
+};
+
 const fields = [
   {
     label: 'Your Message',
@@ -12,16 +18,13 @@ const fields = [
 ];
 
 const Index = () => {
-  const formRef = React.useRef();
-  const onSubmit = React.useCallback(() => {
-    const body = new FormData(formRef.current);
-    body.set('form-name', 'contact');
+  const onSubmit = React.useCallback((formValues) => {
     return fetch('/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body,
+      body: encode({ 'form-name': 'contact', ...formValues }),
     });
   }, []);
 
@@ -57,12 +60,7 @@ const Index = () => {
           of your message.
         </p>
         <hr />
-        <Form
-          ref={formRef}
-          fields={fields}
-          name="contact"
-          onSubmit={onSubmit}
-        />
+        <Form fields={fields} name="contact" onSubmit={onSubmit} />
       </div>
     </Layout>
   );
